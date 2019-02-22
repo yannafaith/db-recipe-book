@@ -14,18 +14,18 @@ module.exports = {
     },
 
     addDish: (dish) => {
-        return db('dishes').insert(dish).select('id')
+        return db('dishes').insert(dish)
     },
 
     // recipes 
     getRecipes: (id) => {
         if (id) {
-            return db('recipes').where({id: dish_id})
+            return db('recipes').where({'recipes.id': id}).join('dishes', {'recipes.dish_id': 'dishes.id'}).select('dish_name', 'recipe_name')
         }
         return db('recipes')
     },
 
     addRecipe: (recipe) => {
-        return db('recipes').insert(recipe).select('id')
+        return db('recipes').insert(recipe)
     },
 }
