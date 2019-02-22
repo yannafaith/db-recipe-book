@@ -13,5 +13,15 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:id', (req, res) => {
+    db.getDishes(req.params.id)
+    .then(dish => {
+        res.status(200).json(dish)
+    })
+    .catch(() => {
+        res.status(500).json({error: 'could not retrieve table.'})
+    })
+});
+
 module.exports = router;
 

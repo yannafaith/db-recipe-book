@@ -8,24 +8,24 @@ module.exports = {
 
     getDishes: (id) => {
         if (id) {
-            return db('dishes').where({id: id})
+            return db('dishes').where({'dishes.id':id}).join('recipes', {'dishes.id': 'recipes.dish_id'}).select('dish_name', 'recipe_name')
         }
         return db('dishes')
     },
 
     addDish: (dish) => {
-        return db('dishes').insert(dish)
+        return db('dishes').insert(dish).select('id')
     },
 
     // recipes 
     getRecipes: (id) => {
         if (id) {
-            return db('recipes').where({id: id})
+            return db('recipes').where({id: dish_id})
         }
         return db('recipes')
     },
 
     addRecipe: (recipe) => {
-        return db('recipes').insert(recipe)
+        return db('recipes').insert(recipe).select('id')
     },
 }
